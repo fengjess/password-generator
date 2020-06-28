@@ -1,5 +1,5 @@
-var genPasswordBtn = document.getElementById("genPasswordBtn");
-var copyPasswordBtn = document.getElementById("copyPasswordBtn");
+var genPassword = document.getElementById("genPassword");
+var copyPassword = document.getElementById("copyPassword");
 var yourPassword = document.getElementById("yourPassword");
 var values = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_-+{}|[]\;':.//?><`~";
 var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -9,10 +9,12 @@ var specialChar = "!@#$%^&*()_-+={}|[]\;':.,/?><`~";
 var password = "";
 var tempValues = "";
 
+
 //  Chooses password length
-genPasswordBtn.addEventListener("click", function (event) {
+genPassword.addEventListener("click", function (event) {
     event.preventDefault();
     var passwordLen = prompt("How many characters would you like your password to contain?");
+    console.log(passwordLen);
 
 
     // Verifies password length is between 8-128 characters
@@ -21,7 +23,7 @@ genPasswordBtn.addEventListener("click", function (event) {
         return;
     }
 
-    // Gives user options on their password preference
+    // Gives user options for their password
     function getUserOptions() {
         if (confirm("Add uppercase letters?")) {
             tempValues = tempValues + upperCase;
@@ -48,7 +50,6 @@ genPasswordBtn.addEventListener("click", function (event) {
     for (var i = 0; i < passwordLen; i++) {
         password = password + tempValues.charAt(Math.floor(Math.random() * values.length)+ 1);
         console.log(password);
-        // password = password + getUserOptions(Math.floor(Math.random() * values.length)+ 1);
     }
 
 
@@ -58,8 +59,10 @@ yourPassword.textContent = password;
 });
 
 // Copies password to clipboard
-copyPasswordBtn.addEventListener("click", function () {
+copyPassword.addEventListener("click", function () {
     yourPassword.select();
     document.execCommand("copy");
     alert("Your password has been copied");
+    location.reload();
 });
+
